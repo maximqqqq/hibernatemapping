@@ -6,26 +6,25 @@ import javax.persistence.*;
 @Table(name = "pet")
 
 public class Pet {
-//    private int id;
-//    private String nic;
-//      private Client CLIENT;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "CLIENT")
-//    public Client getCLIENT() {
-//        return CLIENT;
-//    }
-
-
-
     @Column(name = "NIC")
     private String nic;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private Client client;
+
     public Pet(){
 
+    }
+
+    public Pet(String nic){
+        this.nic = nic;
     }
 
     public int getId() {
@@ -42,6 +41,14 @@ public class Pet {
 
     public void setNic(String nic) {
         this.nic = nic;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override

@@ -3,23 +3,17 @@ package entity;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "client")
 public class Client {
-//    private int id;
-//    private String name;
-//    private String adress;
-//    private Pet PET;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//
-//    @OneToOne
-//    @JoinColumn(referencedColumnName = "id")
-//    public Pet getPET(){
-//        return this.PET;
-//    }
 
     @Column(name = "NAME")
     private String name;
@@ -27,8 +21,22 @@ public class Client {
     @Column(name = "ADRESS")
     private String adress;
 
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pet> pets;
+
     public Client(){
 
+    }
+
+    public Client(String name,String adress){
+        this.name = name;
+        this.adress = adress;
+         pets = new ArrayList<Pet>();
+    }
+
+    public void addPet (Pet pet){
+        pet.setClient(this);
+        pets.add(pet);
     }
 
     public int getId() {
@@ -53,6 +61,14 @@ public class Client {
 
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+    public List<Pet> getAutos() {
+        return pets;
+    }
+
+    public void setAutos(List<Pet> autos) {
+        this.pets = pets;
     }
 
     @Override

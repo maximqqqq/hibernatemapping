@@ -11,12 +11,13 @@ public class Domain {
 
         session.beginTransaction();
 
-        Client client = new Client();
-        client.setName("Vova");
-        client.setAdress("Gomel");
+          Client client = new Client("Miha","Minsk");
+//        client.setName("Vov");
+//        client.setAdress("Gome");
 
-        Pet pet = new Pet();
-        pet.setNic("Bob");
+
+          Pet pet = new Pet("Bobi");
+//        pet.setNic("Bo");
 
 
 
